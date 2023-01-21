@@ -1,5 +1,5 @@
 import React from "react";
-import ContentItem from "../ContentItem";
+import ContentItem from "./ContentItem";
 import { usePlanner } from "../../MyHooks";
 
 export default function Content() {

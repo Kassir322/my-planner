@@ -29,14 +29,14 @@
   margin-bottom: 15px;
 }
 
-.content {
+.taskForm {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.content__row {
+.taskForm__row {
   display: flex;
   flex-direction: row;
 }

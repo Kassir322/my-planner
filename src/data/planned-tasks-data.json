@@ -1,6 +1,17 @@
 [
   {
+    "type": "planned",
     "title": "Сходить в кино",
     "content": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate aliquid."
+  },
+  {
+    "type": "planned",
+    "title": "Задача без описания",
+    "content": ""
+  },
+  {
+    "type": "doing",
+    "title": "Задача с описанием",
+    "content": "Описание."
   }
 ]

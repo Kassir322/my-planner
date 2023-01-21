@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { usePlanner } from "../../MyHooks";
 import "../css/NewTaskForm.css";
-import ContentRow from "./ContentRow";
+import TaskRow from "./TaskRow";
 
 export default function NewTaskForm() {
   const [formRows, setFormRows] = useState();
@@ -9,16 +9,20 @@ export default function NewTaskForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (formData.taskTitle != "") {
-      hideForm();
       addPlannedTask();
-      setFormData({
-        taskTitle: "",
-        taskDescription: "",
-        taskDedline: "",
-      });
+      closeForm();
     } else {
       alert("У задачи должен быть заголовок");
     }
+  };
+
+  const closeForm = () => {
+    hideForm();
+    setFormData({
+      taskTitle: "",
+      taskDescription: "",
+      taskDedline: "",
+    });
   };
 
   const onChangeHandler = (e) => {
@@ -36,23 +40,30 @@ export default function NewTaskForm() {
       {form && (
         <div className="newtaskform">
           <h1 className="newtaskform__title">Новая задача</h1>
-          <form onSubmit={handleSubmit} className="content">
-            <ContentRow
+          <form
+            onReset={() => closeForm()}
+            onSubmit={handleSubmit}
+            className="taskForm"
+          >
+            <TaskRow
               name="taskTitle"
               description={"Название задачи:"}
               onChangeInput={onChangeHandler}
             />
-            <ContentRow
+            <TaskRow
               name="taskDescription"
               description={"Описание задачи:"}
               onChangeInput={onChangeHandler}
             />
-            <ContentRow
+            <TaskRow
               name="taskDedline"
               description={"Дедлайн:"}
               onChangeInput={onChangeHandler}
             />
-            <input type="submit" value="Отправить" />
+            <div>
+              <input type="submit" value="Отправить" />
+              <input type="reset" value="Отменить" />
+            </div>
           </form>
           <pre>{JSON.stringify(formData, null, 2)}</pre>
         </div>
