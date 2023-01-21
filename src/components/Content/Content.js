@@ -3,8 +3,7 @@ import ContentItem from "./ContentItem";
 import { usePlanner } from "../../MyHooks";
 
 export default function Content() {
-  const { showForm, plannedTasks } = usePlanner();
-
+  const { showForm, tasks, filterTask } = usePlanner();
   return (
     <div className="content">
       <div className="container">
@@ -13,7 +12,7 @@ export default function Content() {
             <h1 className="content__window__title">Предстоящее</h1>
             <div className="main__window__content">
               <button onClick={showForm}>add</button>
-              {plannedTasks.map((obj, i) => (
+              {filterTask("planned").map((obj, i) => (
                 <ContentItem content={obj.content} title={obj.title} key={i} />
               ))}
             </div>
@@ -21,8 +20,7 @@ export default function Content() {
           <div className="content__window">
             <h1 className="content__window__title">В процессе</h1>
             <div className="main__window__content">
-              <button onClick={showForm}>add</button>
-              {plannedTasks.map((obj, i) => (
+              {filterTask("doing").map((obj, i) => (
                 <ContentItem content={obj.content} title={obj.title} key={i} />
               ))}
             </div>
@@ -30,8 +28,7 @@ export default function Content() {
           <div className="content__window">
             <h1 className="content__window__title">Выполнено</h1>
             <div className="main__window__content">
-              <button onClick={showForm}>add</button>
-              {plannedTasks.map((obj, i) => (
+              {filterTask("completed").map((obj, i) => (
                 <ContentItem content={obj.content} title={obj.title} key={i} />
               ))}
             </div>

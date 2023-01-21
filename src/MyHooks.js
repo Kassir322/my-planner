@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import participantsData from "./data/participants-data.json";
-import plannedTasksData from "./data/planned-tasks-data.json";
+import tasksData from "./data/tasks-data.json";
 
 const PlannerContext = createContext();
 export const usePlanner = () => useContext(PlannerContext);
@@ -34,12 +34,17 @@ export default function PlannerProvider({ children }) {
     setForm(false);
   };
 
-  const [plannedTasks, setPlannedTasks] = useState(plannedTasksData);
+  const [tasks, setTasks] = useState(tasksData);
+
+  const filterTask = (filterType) => {
+    return tasks.filter((obj) => obj.type === filterType);
+  };
 
   const addPlannedTask = () => {
-    setPlannedTasks([
-      ...plannedTasks,
+    setTasks([
+      ...tasks,
       {
+        type: "planned",
         title: formData.taskTitle,
         content: formData.taskDescription,
       },
@@ -56,7 +61,8 @@ export default function PlannerProvider({ children }) {
         hideForm,
         formData,
         setFormData,
-        plannedTasks,
+        tasks,
+        filterTask,
         addPlannedTask,
       }}
     >

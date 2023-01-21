@@ -13,5 +13,10 @@
     "type": "doing",
     "title": "Задача с описанием",
     "content": "Описание."
+  },
+  {
+    "type": "completed",
+    "title": "Сверстать макет",
+    "content": "Ну почти."
   }
 ]
