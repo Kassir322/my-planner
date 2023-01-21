@@ -1,0 +1,19 @@
+.participant {
+  min-height: 43px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.participant__img {
+  height: 100%;
+  width: 43px;
+  margin-right: 11px;
+  border-radius: 50%;
+  display: flex;
+}
+
+.participant__img img {
+  margin: auto;
+}
