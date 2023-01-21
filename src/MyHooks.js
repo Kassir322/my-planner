@@ -51,6 +51,28 @@ export default function PlannerProvider({ children }) {
     ]);
   };
 
+  const [taskInfo, setTaskInfo] = useState({
+    visibility: false,
+    title: "",
+    content: "",
+  });
+
+  const showTaskInfo = (title, content) => {
+    setTaskInfo({
+      visibility: true,
+      title: title,
+      content: content,
+    });
+  };
+
+  const hideTaskInfo = () => {
+    setTaskInfo({
+      visibility: false,
+      title: "",
+      content: "",
+    });
+  };
+
   return (
     <PlannerContext.Provider
       value={{
@@ -64,6 +86,9 @@ export default function PlannerProvider({ children }) {
         tasks,
         filterTask,
         addPlannedTask,
+        taskInfo,
+        showTaskInfo,
+        hideTaskInfo,
       }}
     >
       {children}

@@ -1,9 +1,11 @@
 import React from "react";
 import ContentItem from "./ContentItem";
 import { usePlanner } from "../../MyHooks";
+import TaskInfo from "../TaskInfo";
 
 export default function Content() {
   const { showForm, tasks, filterTask } = usePlanner();
+
   return (
     <div className="content">
       <div className="container">

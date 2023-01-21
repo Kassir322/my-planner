@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import PlannerProvider from "./MyHooks";
 import AppWrapper from "./components/AppWrapper";
 import NewTaskForm from "./components/NewTaskForm/NewTaskForm";
+import TaskInfo from "./components/TaskInfo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,6 +17,7 @@ root.render(
   <PlannerProvider>
     <AppWrapper />
     <NewTaskForm />
+    <TaskInfo />
   </PlannerProvider>
 );
 

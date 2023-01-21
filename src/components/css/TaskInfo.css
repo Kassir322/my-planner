@@ -1,0 +1,46 @@
+.taskinfo {
+  width: fit-content;
+  height: fit-content;
+  padding: 25px;
+  background-color: #dad9ff;
+  border-radius: 10px;
+  z-index: 10;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.closeinfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.closeinfo button {
+  padding: 6px;
+}
+
+.info {
+  background-color: #ffffff;
+  max-width: 310px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.actions {
+  background-color: #cac8fd;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.actions button {
+  padding: 4px;
+}
