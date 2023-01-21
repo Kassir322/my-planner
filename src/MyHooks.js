@@ -52,13 +52,15 @@ export default function PlannerProvider({ children }) {
   };
 
   const [taskInfo, setTaskInfo] = useState({
+    type: "",
     visibility: false,
     title: "",
     content: "",
   });
 
-  const showTaskInfo = (title, content) => {
+  const showTaskInfo = (type, title, content) => {
     setTaskInfo({
+      type: type,
       visibility: true,
       title: title,
       content: content,
@@ -67,10 +69,20 @@ export default function PlannerProvider({ children }) {
 
   const hideTaskInfo = () => {
     setTaskInfo({
+      type: "",
       visibility: false,
       title: "",
       content: "",
     });
+  };
+
+  const deleteTask = () => {
+    setTasks(
+      tasks.filter(
+        (obj) =>
+          obj.title !== taskInfo.title && obj.content !== taskInfo.content
+      )
+    );
   };
 
   return (
@@ -89,6 +101,7 @@ export default function PlannerProvider({ children }) {
         taskInfo,
         showTaskInfo,
         hideTaskInfo,
+        deleteTask,
       }}
     >
       {children}
