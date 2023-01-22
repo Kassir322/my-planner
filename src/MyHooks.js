@@ -76,13 +76,13 @@ export default function PlannerProvider({ children }) {
     });
   };
 
-  const doTask = () => {
+  const setTaskType = (type) => {
     let newTasks = [...tasks];
     for (let i in newTasks) {
       console.log(newTasks[i]);
       if (taskInfo.title === newTasks[i].title) {
         if (taskInfo.content === newTasks[i].content) {
-          newTasks[i].type = "doing";
+          newTasks[i].type = type;
         }
       }
     }
@@ -117,7 +117,7 @@ export default function PlannerProvider({ children }) {
         showTaskInfo,
         hideTaskInfo,
         deleteTask,
-        doTask,
+        setTaskType,
       }}
     >
       {children}
