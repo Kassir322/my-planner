@@ -3,7 +3,7 @@ import { usePlanner } from "../MyHooks";
 import "./css/TaskInfo.css";
 
 export default function TaskInfo() {
-  const { taskInfo, hideTaskInfo, deleteTask, tasks } = usePlanner();
+  const { taskInfo, hideTaskInfo, deleteTask, tasks, doTask } = usePlanner();
   return (
     <>
       {taskInfo.visibility && (
@@ -19,7 +19,9 @@ export default function TaskInfo() {
             {(taskInfo.type === "planned" || taskInfo.type === "doing") && (
               <button>Выполнено</button>
             )}
-            {taskInfo.type === "planned" && <button>Выполнять</button>}
+            {taskInfo.type === "planned" && (
+              <button onClick={doTask}>Выполнять</button>
+            )}
             <button
               onClick={() => {
                 deleteTask();

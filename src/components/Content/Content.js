@@ -4,7 +4,7 @@ import { usePlanner } from "../../MyHooks";
 import TaskInfo from "../TaskInfo";
 
 export default function Content() {
-  const { showForm, tasks, filterTask } = usePlanner();
+  const { showForm, filterTask } = usePlanner();
 
   return (
     <div className="content">

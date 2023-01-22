@@ -76,6 +76,20 @@ export default function PlannerProvider({ children }) {
     });
   };
 
+  const doTask = () => {
+    let newTasks = [...tasks];
+    for (let i in newTasks) {
+      console.log(newTasks[i]);
+      if (taskInfo.title === newTasks[i].title) {
+        if (taskInfo.content === newTasks[i].content) {
+          newTasks[i].type = "doing";
+        }
+      }
+    }
+    setTasks(newTasks);
+    hideTaskInfo();
+  };
+
   const deleteTask = () => {
     setTasks(
       tasks.filter(
@@ -83,6 +97,7 @@ export default function PlannerProvider({ children }) {
           obj.title !== taskInfo.title && obj.content !== taskInfo.content
       )
     );
+    hideTaskInfo();
   };
 
   return (
@@ -102,6 +117,7 @@ export default function PlannerProvider({ children }) {
         showTaskInfo,
         hideTaskInfo,
         deleteTask,
+        doTask,
       }}
     >
       {children}
