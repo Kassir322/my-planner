@@ -13,7 +13,6 @@ export default function Content() {
           <div className="content__window">
             <h1 className="content__window__title">Предстоящее</h1>
             <div className="main__window__content">
-              <button onClick={showForm}>add</button>
               {filterTask("planned").map((obj, i) => (
                 <ContentItem
                   type={"planned"}
@@ -22,6 +21,9 @@ export default function Content() {
                   key={i}
                 />
               ))}
+              <div className="addtask__btn" onClick={() => showForm("planned")}>
+                +
+              </div>
             </div>
           </div>
           <div className="content__window">
@@ -35,6 +37,9 @@ export default function Content() {
                   key={i}
                 />
               ))}
+              <div className="addtask__btn" onClick={() => showForm("doing")}>
+                +
+              </div>
             </div>
           </div>
           <div className="content__window">
@@ -48,6 +53,12 @@ export default function Content() {
                   key={i}
                 />
               ))}
+              <div
+                className="addtask__btn"
+                onClick={() => showForm("completed")}
+              >
+                +
+              </div>
             </div>
           </div>
         </div>

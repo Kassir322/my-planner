@@ -9,7 +9,7 @@ export default function NewTaskForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (formData.taskTitle != "") {
-      addPlannedTask();
+      addTask();
       closeForm();
     } else {
       alert("У задачи должен быть заголовок");
@@ -32,12 +32,11 @@ export default function NewTaskForm() {
     });
   };
 
-  const { form, hideForm, formData, setFormData, addPlannedTask } =
-    usePlanner();
+  const { form, hideForm, formData, setFormData, addTask } = usePlanner();
 
   return (
     <>
-      {form && (
+      {form.visibility && (
         <div className="newtaskform">
           <h1 className="newtaskform__title">Новая задача</h1>
           <form
@@ -65,7 +64,7 @@ export default function NewTaskForm() {
               <input type="reset" value="Отменить" />
             </div>
           </form>
-          <pre>{JSON.stringify(formData, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(formData, null, 2)}</pre> */}
         </div>
       )}
     </>

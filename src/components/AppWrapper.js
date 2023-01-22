@@ -9,7 +9,7 @@ export default function AppWrapper() {
     <div className="app__wrapper">
       <div className="app__wrapper__inner">
         <Header />
-        <UnderHeader />
+        {/* <UnderHeader /> */}
         <Content />
       </div>
     </div>

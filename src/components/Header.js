@@ -8,7 +8,7 @@ export default function Header() {
           <div className="app_logo">
             <img src={require(`../png/logo.png`)} />
           </div>
-          <div className="header__navbar">
+          {/* <div className="header__navbar">
             <a className="header__nav__link">Все команды</a>
             <a className="header__nav__link">Мои задачи</a>
             <a className="header__nav__link">Помощь</a>
@@ -18,7 +18,7 @@ export default function Header() {
           </div>
           <div className="header__ava">
             <img src={require(`../png/ava2.png`)} />
-          </div>
+          </div> */}
         </header>
       </div>
     </div>

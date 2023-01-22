@@ -24,14 +24,23 @@ export default function PlannerProvider({ children }) {
     taskDedline: "",
   });
 
-  const [form, setForm] = useState(false);
+  const [form, setForm] = useState({
+    visibility: false,
+    type: "",
+  });
 
-  const showForm = () => {
-    setForm(true);
+  const showForm = (type) => {
+    setForm({
+      visibility: true,
+      type: type,
+    });
   };
 
   const hideForm = () => {
-    setForm(false);
+    setForm({
+      visibility: false,
+      type: "",
+    });
   };
 
   const [tasks, setTasks] = useState(tasksData);
@@ -40,11 +49,11 @@ export default function PlannerProvider({ children }) {
     return tasks.filter((obj) => obj.type === filterType);
   };
 
-  const addPlannedTask = () => {
+  const addTask = () => {
     setTasks([
       ...tasks,
       {
-        type: "planned",
+        type: form.type,
         title: formData.taskTitle,
         content: formData.taskDescription,
       },
@@ -112,7 +121,7 @@ export default function PlannerProvider({ children }) {
         setFormData,
         tasks,
         filterTask,
-        addPlannedTask,
+        addTask,
         taskInfo,
         showTaskInfo,
         hideTaskInfo,
