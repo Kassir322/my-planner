@@ -10,6 +10,7 @@ export default function TaskInfo() {
       {taskInfo.visibility && (
         <div className="taskinfo">
           <div className="closeinfo">
+            <button>fav</button>
             <button onClick={hideTaskInfo}>X</button>
           </div>
           <div className="info">

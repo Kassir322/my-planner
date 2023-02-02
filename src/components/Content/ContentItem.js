@@ -4,8 +4,14 @@ import TaskInfo from "../TaskInfo";
 
 export default function ContentItem({ type, title, content }) {
   const { showTaskInfo } = usePlanner();
+  const colorTypes = {
+    planned: "#f1deff",
+    doing: "#DFD6FF",
+    completed: "#CBDAFF",
+  };
   return (
     <div
+      style={{ backgroundColor: colorTypes[type] }}
       className="content__item"
       onClick={() => {
         showTaskInfo(type, title, content);
