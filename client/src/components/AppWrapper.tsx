@@ -3,16 +3,17 @@ import './css/AppWrapper.css'
 import UnderHeader from './UnderHeader'
 import Header from './Header'
 import Content from './Content/Content'
+import { observer } from 'mobx-react-lite'
 
 const AppWrapper: FC = () => {
 	return (
 		<div className="app__wrapper">
 			<div className="app__wrapper__inner">
 				<Header />
-				{/* <UnderHeader /> */}
+				<UnderHeader />
 				<Content />
 			</div>
 		</div>
 	)
 }
-export default AppWrapper
+export default observer(AppWrapper)

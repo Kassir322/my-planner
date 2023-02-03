@@ -1,36 +1,38 @@
-import React, { FC } from 'react'
-import { usePlanner } from '../MyHooks'
+import { observer } from 'mobx-react-lite'
+import React, { FC, useContext } from 'react'
+import { Context } from '..'
 import './css/TaskInfo.css'
 
 const TaskInfo: FC = () => {
-	const { taskInfo, hideTaskInfo, deleteTask, tasks, setTaskType } =
-		usePlanner()
-
+	const { store } = useContext(Context)
 	return (
 		<>
-			{taskInfo.visibility && (
+			{store.taskInfo.visibility && (
 				<div className="taskinfo">
 					<div className="closeinfo">
 						<button onClick={() => console.log('Will be soon!')}>fav</button>
-						<button onClick={hideTaskInfo}>X</button>
+						<button onClick={() => store.hideTaskInfo()}>X</button>
 					</div>
 					<div className="info">
-						<h1>{taskInfo.title}</h1>
-						<div>{taskInfo.content}</div>
+						<h1>{store.taskInfo.title}</h1>
+						<div>{store.taskInfo.content}</div>
 					</div>
 					<div className="actions">
-						{(taskInfo.type === 'planned' || taskInfo.type === 'doing') && (
-							<button onClick={() => setTaskType('completed')}>
+						{(store.taskInfo.type === 'planned' ||
+							store.taskInfo.type === 'doing') && (
+							<button onClick={() => store.setTaskType('completed')}>
 								Выполнено
 							</button>
 						)}
-						{taskInfo.type === 'planned' && (
-							<button onClick={() => setTaskType('doing')}>Выполнять</button>
+						{store.taskInfo.type === 'planned' && (
+							<button onClick={() => store.setTaskType('doing')}>
+								Выполнять
+							</button>
 						)}
 						<button
 							onClick={() => {
-								deleteTask()
-								console.log(tasks)
+								store.deleteTask()
+								console.log(store.tasks)
 							}}
 						>
 							Удалить
@@ -41,4 +43,4 @@ const TaskInfo: FC = () => {
 		</>
 	)
 }
-export default TaskInfo
+export default observer(TaskInfo)
