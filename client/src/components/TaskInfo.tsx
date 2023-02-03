@@ -11,7 +11,7 @@ const TaskInfo: FC = () => {
 			{taskInfo.visibility && (
 				<div className="taskinfo">
 					<div className="closeinfo">
-						<button>fav</button>
+						<button onClick={() => console.log('Will be soon!')}>fav</button>
 						<button onClick={hideTaskInfo}>X</button>
 					</div>
 					<div className="info">
