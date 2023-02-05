@@ -1,8 +1,8 @@
 import { FC, useContext } from 'react'
-import './css/ParticipantWindow.css'
+import './ParticipantWindow.css'
 import { Participant, participantProps } from './Participant'
 import prcpntBtn from '../png/addParticipant.png'
-import { Context } from '..'
+import { Context } from '../..'
 import { observer } from 'mobx-react-lite'
 
 const ParticipantWindow: FC = () => {

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC, useContext } from 'react'
-import { Context } from '..'
-import './css/TaskInfo.css'
+import { Context } from '../..'
+import './TaskInfo.css'
 
 const TaskInfo: FC = () => {
 	const { store } = useContext(Context)

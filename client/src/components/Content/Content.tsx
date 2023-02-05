@@ -20,12 +20,12 @@ const Content: FC = () => {
 									key={i}
 								/>
 							))}
-							<div
-								className="addtask__btn"
-								onClick={() => store.showForm('planned')}
-							>
-								+
-							</div>
+						</div>
+						<div
+							className="addtask__btn"
+							onClick={() => store.showForm('planned')}
+						>
+							+
 						</div>
 					</div>
 					<div className="content__window">
@@ -39,12 +39,12 @@ const Content: FC = () => {
 									key={i}
 								/>
 							))}
-							<div
-								className="addtask__btn"
-								onClick={() => store.showForm('doing')}
-							>
-								+
-							</div>
+						</div>
+						<div
+							className="addtask__btn"
+							onClick={() => store.showForm('doing')}
+						>
+							+
 						</div>
 					</div>
 					<div className="content__window">
@@ -58,12 +58,12 @@ const Content: FC = () => {
 									key={i}
 								/>
 							))}
-							<div
-								className="addtask__btn"
-								onClick={() => store.showForm('completed')}
-							>
-								+
-							</div>
+						</div>
+						<div
+							className="addtask__btn"
+							onClick={() => store.showForm('completed')}
+						>
+							+
 						</div>
 					</div>
 				</div>

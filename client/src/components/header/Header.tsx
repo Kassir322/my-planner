@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import './Header.css'
 
 const Header: FC = () => {
 	return (
@@ -6,7 +7,7 @@ const Header: FC = () => {
 			<div className="container">
 				<header className="app__header">
 					<div className="app_logo">
-						<img src={require(`../png/logo.png`)} />
+						<img src={require(`../../png/logo.png`)} />
 					</div>
 					{/* <div className="header__navbar">
             <a className="header__nav__link">Все команды</a>

@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import './css/AppWrapper.css'
-import UnderHeader from './UnderHeader'
-import Header from './Header'
-import Content from './Content/Content'
+import './AppWrapper.css'
+import UnderHeader from '../underHeader/UnderHeader'
+import Header from '../header/Header'
+import Content from '../Content/Content'
 import { observer } from 'mobx-react-lite'
 
 const AppWrapper: FC = () => {

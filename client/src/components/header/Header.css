@@ -1,0 +1,33 @@
+.app__header {
+	min-height: 87px;
+	background-image: url('../../png/header.png');
+	display: flex;
+	flex-direction: row;
+	padding: 0 27px;
+	align-items: center;
+}
+
+.app_logo {
+	max-height: 42px;
+}
+
+.header__navbar {
+	display: flex;
+	flex-direction: row;
+	gap: 45px;
+	padding: 0 60px;
+}
+
+.header__nav__link {
+	font-size: 27px;
+	font-weight: 400;
+	color: #fff;
+}
+
+.header__ava {
+	align-self: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	width: 8%;
+}

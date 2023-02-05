@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite'
 import React, { FC, useContext, useEffect } from 'react'
 import { Context } from '..'
-import AppWrapper from './AppWrapper'
+import AppWrapper from './appWrapper/AppWrapper'
 import LoginForm from './loginForm/LoginForm'
 import NewTaskForm from './NewTaskForm/NewTaskForm'
-import TaskInfo from './TaskInfo'
+import TaskInfo from './taskInfo/TaskInfo'
 
 const App: FC = () => {
 	const { store } = useContext(Context)

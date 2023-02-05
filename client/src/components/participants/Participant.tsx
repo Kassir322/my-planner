@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import './css/Participant.css'
+import './Participant.css'
 
 export type participantProps = {
 	ava: string

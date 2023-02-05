@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { FC, useContext } from 'react'
 import { Context } from '../..'
-import '../css/NewTaskForm.css'
+import './NewTaskForm.css'
 import TaskRow from './TaskRow'
 
 const NewTaskForm: FC = () => {
