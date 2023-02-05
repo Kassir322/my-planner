@@ -1,6 +1,11 @@
+import { API_URL } from './../serverApi/http/index'
+import { AuthResponse } from './../serverApi/models/response/AuthResponse'
+import AuthService from '../serverApi/services/AuthService'
+import { IUser } from './../serverApi/models/IUser'
 import { makeAutoObservable } from 'mobx'
 import pData from '../data/participants-data.json'
 import tasksData from '../data/tasks-data.json'
+import axios from 'axios'
 
 type task = {
 	type: string
@@ -13,16 +18,13 @@ type participant = {
 	name: string
 }
 export default class Store {
-	testCount = 0
-
+	// App variables ==========================================
 	participants: participant[] = pData
-
 	formData = {
 		taskTitle: '',
 		taskDescription: '',
 		taskDedline: '',
 	}
-
 	setFormData(taskTitle: string, taskDescription: string, taskDedline: string) {
 		this.formData = {
 			taskTitle: taskTitle,
@@ -30,7 +32,6 @@ export default class Store {
 			taskDedline: taskDedline,
 		}
 	}
-
 	form = {
 		visibility: false,
 		type: '',
@@ -43,13 +44,80 @@ export default class Store {
 		content: '',
 	}
 
+	// Server variables ==========================================
+	user = {} as IUser
+	isAuth = false
+	isLoading = true
+
 	constructor() {
 		makeAutoObservable(this)
 	}
 
-	incCount() {
-		this.testCount = this.testCount + 1
+	// Server functions ==========================================
+
+	setAuth(bool: boolean) {
+		this.isAuth = bool
 	}
+
+	setUser(user: IUser) {
+		this.user = user
+	}
+
+	setLoading(bool: boolean) {
+		this.isLoading = bool
+	}
+
+	async login(email: string, password: string) {
+		try {
+			const response = await AuthService.login(email, password)
+			console.log(response)
+			localStorage.setItem('token', response.data.accessToken)
+			this.setAuth(true)
+			this.setUser(response.data.user)
+		} catch (e) {
+			console.log(e)
+		}
+	}
+
+	async registration(email: string, password: string) {
+		try {
+			const response = await AuthService.registration(email, password)
+			console.log(response)
+
+			localStorage.setItem('token', response.data.accessToken)
+			this.setAuth(true)
+			this.setUser(response.data.user)
+		} catch (e) {
+			console.log(e)
+		}
+	}
+
+	async logout() {
+		try {
+			const response = await AuthService.logout()
+			localStorage.removeItem('token')
+			this.setAuth(false)
+			this.setUser({} as IUser)
+		} catch (e) {
+			console.log(e)
+		}
+	}
+
+	async checkAuth() {
+		try {
+			const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+				withCredentials: true,
+			})
+			localStorage.setItem('token', response.data.accessToken)
+			this.setAuth(true)
+			this.setUser(response.data.user)
+		} catch (e) {
+			console.log(e)
+		} finally {
+			this.setLoading(false)
+		}
+	}
+	// App functions ==========================================
 
 	addParticipant(ava: string, name: string) {
 		this.participants = [
