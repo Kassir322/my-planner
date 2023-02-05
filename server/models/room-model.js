@@ -1,14 +1,14 @@
 const { Schema, model } = require('mongoose')
 
 const RoomSchema = new Schema({
-	roomId: { type: String, required: true, unique: true },
-	participants: { type: [{ participantId: { type: String, required: true } }] },
+	// roomId: { type: String, required: true, unique: true },
+	participants: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 	tasks: {
 		type: {
 			planned: {
 				type: [
 					{
-						title: { type: String, required: true },
+						title: { type: String },
 						description: { type: String },
 					},
 				],
@@ -16,7 +16,7 @@ const RoomSchema = new Schema({
 			doing: {
 				type: [
 					{
-						title: { type: String, required: true },
+						title: { type: String },
 						description: { type: String },
 					},
 				],
@@ -24,7 +24,7 @@ const RoomSchema = new Schema({
 			completed: {
 				type: [
 					{
-						title: { type: String, required: true },
+						title: { type: String },
 						description: { type: String },
 					},
 				],

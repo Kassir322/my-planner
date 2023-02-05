@@ -1,7 +1,15 @@
 const roomService = require('../services/room-service')
 
 class RoomController {
-	async createRoom(req, res, next) {}
+	async createRoom(req, res, next) {
+		try {
+			const { participantMail } = req.body
+			const roomData = await roomService.createRoom(participantMail)
+			return res.json(roomData)
+		} catch (e) {
+			next(e)
+		}
+	}
 
 	async addTask(req, res, next) {
 		try {
