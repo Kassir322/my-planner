@@ -2,6 +2,7 @@ const userController = require('../controllers/user-controller')
 const Router = require('express').Router
 const { body } = require('express-validator')
 const authMiddleware = require('../middlewares/auth-middleware')
+const roomController = require('../controllers/room-controller')
 
 const router = new Router()
 
@@ -13,6 +14,7 @@ router.post(
 )
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
+router.post('/tasks/add', roomController.addTask)
 router.get('/activate/:link', userController.activate)
 router.get('/refresh', userController.refresh)
 router.get('/users', authMiddleware, userController.getUsers)
