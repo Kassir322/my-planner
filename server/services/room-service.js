@@ -1,6 +1,8 @@
 const ApiError = require('../exceptions/api-error')
 const roomModel = require('../models/room-model')
 const uuid = require('uuid')
+const { default: mongoose } = require('mongoose')
+const RoomDto = require('../dtos/room-dto')
 
 class RoomService {
 	async createRoom(participantMail) {
@@ -21,7 +23,15 @@ class RoomService {
 		return room
 	}
 
-	async getRoomData(roomId) {}
+	async getRoomData(roomId) {
+		const room = await roomModel.findById(mongoose.Types.ObjectId(roomId))
+		if (!room) {
+			throw ApiError.BadRequest('Команда не была найдена')
+		}
+		const roomDto = new RoomDto(room)
+		// console.log(roomDto.tasks.planned)
+		return roomDto
+	}
 
 	async addTask(roomId, type, title, description) {
 		const room = await roomModel.findOne({ _id: roomId })

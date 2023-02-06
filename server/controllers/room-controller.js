@@ -13,6 +13,9 @@ class RoomController {
 
 	async getRoomData(req, res, next) {
 		try {
+			const roomId = req.params.link
+			const roomData = await roomService.getRoomData(roomId)
+			return res.json(roomData)
 		} catch (e) {
 			next(e)
 		}
