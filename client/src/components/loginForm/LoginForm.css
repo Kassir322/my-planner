@@ -3,3 +3,7 @@
 	min-height: 600px;
 	background-color: antiquewhite;
 }
+
+.loginform * {
+	font-size: 25px;
+}

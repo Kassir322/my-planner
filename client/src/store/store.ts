@@ -6,6 +6,7 @@ import { makeAutoObservable } from 'mobx'
 import pData from '../data/participants-data.json'
 import tasksData from '../data/tasks-data.json'
 import axios from 'axios'
+import RoomService from '../serverApi/services/RoomService'
 
 type task = {
 	type: string
@@ -74,6 +75,7 @@ export default class Store {
 			localStorage.setItem('token', response.data.accessToken)
 			this.setAuth(true)
 			this.setUser(response.data.user)
+			await this.getRoomData()
 		} catch (e) {
 			console.log(e)
 		}
@@ -87,6 +89,7 @@ export default class Store {
 			localStorage.setItem('token', response.data.accessToken)
 			this.setAuth(true)
 			this.setUser(response.data.user)
+			await this.getRoomData()
 		} catch (e) {
 			console.log(e)
 		}
@@ -111,13 +114,25 @@ export default class Store {
 			localStorage.setItem('token', response.data.accessToken)
 			this.setAuth(true)
 			this.setUser(response.data.user)
-			// console.log(response.data.user.id)
+			await this.getRoomData()
 		} catch (e) {
 			console.log(e)
 		} finally {
 			this.setLoading(false)
 		}
 	}
+
+	// My server functions ==========================================
+
+	async getRoomData() {
+		try {
+			const response = await RoomService.getRoomData(this.user.rooms[0])
+			console.log(response.data)
+		} catch (e) {
+			console.log(e)
+		}
+	}
+
 	// App functions ==========================================
 
 	addParticipant(ava: string, name: string) {

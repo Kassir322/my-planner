@@ -11,7 +11,10 @@ const App: FC = () => {
 
 	useEffect(() => {
 		if (localStorage.getItem('token')) {
-			store.checkAuth().then(() => store.setLoading(false))
+			store
+				.checkAuth()
+				// .then(() => store.getRoomData())
+				.then(() => store.setLoading(false))
 		} else {
 			store.setLoading(false)
 		}
@@ -24,6 +27,7 @@ const App: FC = () => {
 	} else {
 		return (
 			<>
+				<button onClick={() => store.getRoomData()}>Получить данные</button>
 				<AppWrapper />
 				<NewTaskForm />
 				<TaskInfo />
