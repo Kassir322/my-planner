@@ -20,7 +20,7 @@ class UserController {
 				maxAge: 30 * 24 * 60 * 60 * 1000,
 				httpOnly: true,
 			})
-			return res.json(userData)
+			return res.json({ userData, customMessage: 'Hello!' })
 		} catch (error) {
 			next(error)
 		}

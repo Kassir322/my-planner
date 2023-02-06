@@ -11,6 +11,13 @@ class RoomController {
 		}
 	}
 
+	async getRoomData(req, res, next) {
+		try {
+		} catch (e) {
+			next(e)
+		}
+	}
+
 	async addTask(req, res, next) {
 		try {
 			const { roomId, type, title, description } = req.body
