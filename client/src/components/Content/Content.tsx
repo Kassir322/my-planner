@@ -12,14 +12,23 @@ const Content: FC = () => {
 					<div className="content__window">
 						<h1 className="content__window__title">Предстоящее</h1>
 						<div className="main__window__content">
-							{store.filterTask('planned').map((obj, i) => (
+							{/* {store.filterTask('planned').map((obj, i) => (
 								<ContentItem
 									type={'planned'}
 									content={obj.content}
 									title={obj.title}
 									key={i}
 								/>
-							))}
+							))} */}
+							{store.room.tasks &&
+								store.room.tasks.planned.map((obj) => (
+									<ContentItem
+										type="planned"
+										title={obj.title}
+										content={obj.description}
+										key={obj.title}
+									/>
+								))}
 						</div>
 						<div
 							className="addtask__btn"
@@ -31,14 +40,23 @@ const Content: FC = () => {
 					<div className="content__window">
 						<h1 className="content__window__title">В процессе</h1>
 						<div className="main__window__content">
-							{store.filterTask('doing').map((obj, i) => (
+							{/* {store.filterTask('doing').map((obj, i) => (
 								<ContentItem
 									type={'doing'}
 									content={obj.content}
 									title={obj.title}
 									key={i}
 								/>
-							))}
+							))} */}
+							{store.room.tasks &&
+								store.room.tasks.doing.map((obj) => (
+									<ContentItem
+										type="doing"
+										title={obj.title}
+										content={obj.description}
+										key={obj.title}
+									/>
+								))}
 						</div>
 						<div
 							className="addtask__btn"
@@ -50,14 +68,23 @@ const Content: FC = () => {
 					<div className="content__window">
 						<h1 className="content__window__title">Выполнено</h1>
 						<div className="main__window__content">
-							{store.filterTask('completed').map((obj, i) => (
+							{/* {store.filterTask('completed').map((obj, i) => (
 								<ContentItem
 									type={'completed'}
 									content={obj.content}
 									title={obj.title}
 									key={i}
 								/>
-							))}
+							))} */}
+							{store.room.tasks &&
+								store.room.tasks.completed.map((obj) => (
+									<ContentItem
+										type="completed"
+										title={obj.title}
+										content={obj.description}
+										key={obj.title}
+									/>
+								))}
 						</div>
 						<div
 							className="addtask__btn"

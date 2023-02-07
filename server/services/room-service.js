@@ -34,7 +34,7 @@ class RoomService {
 	}
 
 	async addTask(roomId, type, title, description) {
-		const room = await roomModel.findOne({ _id: roomId })
+		const room = await roomModel.findById(mongoose.Types.ObjectId(roomId))
 		if (!room) {
 			throw ApiError.BadRequest('Команда не была найдена')
 		}

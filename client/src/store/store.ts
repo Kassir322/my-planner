@@ -4,14 +4,24 @@ import AuthService from '../serverApi/services/AuthService'
 import { IUser } from './../serverApi/models/IUser'
 import { makeAutoObservable } from 'mobx'
 import pData from '../data/participants-data.json'
-import tasksData from '../data/tasks-data.json'
+// import tasksData from '../data/tasks-data.json'
 import axios from 'axios'
 import RoomService from '../serverApi/services/RoomService'
+import { task as DBTask } from './../serverApi/models/response/RoomResponse'
+type taskTypes = {
+	planned: 'planned'
+	doing: 'doing'
+	completed: 'completed'
+}
 
-type task = {
-	type: string
-	title: string
-	content: string
+type Room = {
+	name: string
+	participants: [string]
+	tasks: {
+		planned: DBTask[]
+		doing: DBTask[]
+		completed: DBTask[]
+	}
 }
 
 type participant = {
@@ -37,7 +47,7 @@ export default class Store {
 		visibility: false,
 		type: '',
 	}
-	tasks: task[] = tasksData
+	// tasks: task[] = tasksData
 	taskInfo = {
 		type: '',
 		visibility: false,
@@ -54,6 +64,12 @@ export default class Store {
 		makeAutoObservable(this)
 	}
 
+	// My server variables ==========================================
+	room = {} as Room
+
+	setRoom(room: Room) {
+		this.room = room
+	}
 	// Server functions ==========================================
 
 	setAuth(bool: boolean) {
@@ -128,6 +144,35 @@ export default class Store {
 		try {
 			const response = await RoomService.getRoomData(this.user.rooms[0])
 			console.log(response.data)
+			this.setRoom(response.data)
+		} catch (e) {
+			console.log(e)
+		}
+	}
+
+	async addTask() {
+		try {
+			const newTask = {
+				type: this.form.type,
+				title: this.formData.taskTitle,
+				description: this.formData.taskDescription,
+			}
+			const response = await RoomService.addTask(
+				this.user.rooms[0],
+				newTask.type,
+				newTask.title,
+				newTask.description
+			)
+			if (
+				newTask.type === 'planned' ||
+				newTask.type === 'doing' ||
+				newTask.type === 'completed'
+			) {
+				this.room.tasks[newTask.type] = [
+					...this.room.tasks[newTask.type],
+					newTask,
+				]
+			}
 		} catch (e) {
 			console.log(e)
 		}
@@ -160,20 +205,9 @@ export default class Store {
 		this.setFormData('', '', '')
 	}
 
-	filterTask(filterType: string) {
-		return this.tasks.filter((obj: task) => obj.type === filterType)
-	}
-
-	addTask() {
-		this.tasks = [
-			...this.tasks,
-			{
-				type: this.form.type,
-				title: this.formData.taskTitle,
-				content: this.formData.taskDescription,
-			},
-		]
-	}
+	// filterTask(filterType: string) {
+	// 	return this.tasks.filter((obj: task) => obj.type === filterType)
+	// }
 
 	showTaskInfo(type: string, title: string, content: string) {
 		this.taskInfo = {
@@ -193,25 +227,25 @@ export default class Store {
 		}
 	}
 
-	setTaskType(type: string) {
-		let newTasks = [...this.tasks]
-		for (let i in newTasks) {
-			if (this.taskInfo.title === newTasks[i].title) {
-				if (this.taskInfo.content === newTasks[i].content) {
-					newTasks[i].type = type
-				}
-			}
-		}
-		this.tasks = newTasks
-		this.hideTaskInfo()
-	}
+	// setTaskType(type: string) {
+	// 	let newTasks = [...this.tasks]
+	// 	for (let i in newTasks) {
+	// 		if (this.taskInfo.title === newTasks[i].title) {
+	// 			if (this.taskInfo.content === newTasks[i].content) {
+	// 				newTasks[i].type = type
+	// 			}
+	// 		}
+	// 	}
+	// 	this.tasks = newTasks
+	// 	this.hideTaskInfo()
+	// }
 
-	deleteTask() {
-		this.tasks = this.tasks.filter(
-			(obj) =>
-				obj.title !== this.taskInfo.title &&
-				obj.content !== this.taskInfo.content
-		)
-		this.hideTaskInfo()
-	}
+	// deleteTask() {
+	// 	this.tasks = this.tasks.filter(
+	// 		(obj) =>
+	// 			obj.title !== this.taskInfo.title &&
+	// 			obj.content !== this.taskInfo.content
+	// 	)
+	// 	this.hideTaskInfo()
+	// }
 }

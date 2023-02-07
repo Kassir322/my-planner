@@ -1,3 +1,4 @@
+import { log } from 'console'
 import { observer } from 'mobx-react-lite'
 import { FC, useContext } from 'react'
 import { Context } from '../..'
@@ -11,6 +12,7 @@ const NewTaskForm: FC = () => {
 		event.preventDefault()
 		if (store.formData.taskTitle !== '') {
 			store.addTask()
+			console.log(store.formData)
 			store.hideForm()
 		} else {
 			alert('У задачи должен быть заголовок')

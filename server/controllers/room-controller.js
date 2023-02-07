@@ -23,7 +23,8 @@ class RoomController {
 
 	async addTask(req, res, next) {
 		try {
-			const { roomId, type, title, description } = req.body
+			const roomId = req.params.link
+			const { type, title, description } = req.body
 			const roomData = await roomService.addTask(
 				roomId,
 				type,

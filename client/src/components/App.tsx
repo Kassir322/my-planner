@@ -27,7 +27,6 @@ const App: FC = () => {
 	} else {
 		return (
 			<>
-				<button onClick={() => store.getRoomData()}>Получить данные</button>
 				<AppWrapper />
 				<NewTaskForm />
 				<TaskInfo />

@@ -14,7 +14,7 @@ router.post(
 )
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
-router.post('/tasks/add', roomController.addTask)
+router.post('/rooms/:link/addTask', roomController.addTask)
 router.post('/rooms/create', roomController.createRoom)
 router.get('/rooms/:link/getData', roomController.getRoomData)
 router.get('/activate/:link', userController.activate)
