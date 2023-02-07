@@ -9,6 +9,7 @@ const RoomSchema = new Schema({
 			planned: {
 				type: [
 					{
+						type: { type: String },
 						title: { type: String },
 						description: { type: String },
 					},
@@ -17,6 +18,7 @@ const RoomSchema = new Schema({
 			doing: {
 				type: [
 					{
+						type: { type: String },
 						title: { type: String },
 						description: { type: String },
 					},
@@ -25,6 +27,7 @@ const RoomSchema = new Schema({
 			completed: {
 				type: [
 					{
+						type: { type: String },
 						title: { type: String },
 						description: { type: String },
 					},

@@ -24,13 +24,30 @@ class RoomController {
 	async addTask(req, res, next) {
 		try {
 			const roomId = req.params.link
-			const { type, title, description } = req.body
-			const roomData = await roomService.addTask(
-				roomId,
-				type,
-				title,
-				description
-			)
+			const { task } = req.body
+			const roomData = await roomService.addTask(roomId, task)
+			return res.json(roomData)
+		} catch (e) {
+			next(e)
+		}
+	}
+
+	async deleteTask(req, res, next) {
+		try {
+			const roomId = req.params.link
+			const { task } = req.body
+			const roomData = await roomService.deleteTask(roomId, task)
+			return res.json(roomData)
+		} catch (e) {
+			next(e)
+		}
+	}
+
+	async setTaskType(req, res, next) {
+		try {
+			const roomId = req.params.link
+			const { type, task } = req.body
+			const roomData = await roomService.setTaskType(roomId, type, task)
 			return res.json(roomData)
 		} catch (e) {
 			next(e)

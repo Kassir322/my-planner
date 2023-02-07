@@ -1,4 +1,5 @@
 export type task = {
+	type: string
 	title: string
 	description: string
 }

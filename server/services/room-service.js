@@ -15,7 +15,7 @@ class RoomService {
 			name: `Команда ${participantMail}`,
 			participants: [participantMail],
 			tasks: {
-				planned: [{ title: 'planned title1', description: 'planned descr1' }],
+				planned: [],
 				doing: [],
 				completed: [],
 			},
@@ -29,25 +29,50 @@ class RoomService {
 			throw ApiError.BadRequest('Команда не была найдена')
 		}
 		const roomDto = new RoomDto(room)
-		// console.log(roomDto.tasks.planned)
 		return roomDto
 	}
 
-	async addTask(roomId, type, title, description) {
+	async addTask(roomId, task) {
 		const room = await roomModel.findById(mongoose.Types.ObjectId(roomId))
 		if (!room) {
 			throw ApiError.BadRequest('Команда не была найдена')
 		}
-		room.tasks[type] = [
-			...room.tasks[type],
-			{
-				title,
-				description,
-			},
-		]
+		room.tasks[task.type] = [...room.tasks[task.type], task]
 
 		await room.save()
+		return room
+	}
 
+	async deleteTask(roomId, task) {
+		let room = await roomModel.findById(mongoose.Types.ObjectId(roomId))
+		if (!room) {
+			throw ApiError.BadRequest('Команда не была найдена')
+		}
+		room.tasks[task.type] = room.tasks[task.type].filter(
+			(taskFilter) =>
+				taskFilter.title !== task.title &&
+				taskFilter.description !== task.description
+		)
+
+		await room.save()
+		return room
+	}
+
+	async setTaskType(roomId, type, task) {
+		let room = await roomModel.findById(mongoose.Types.ObjectId(roomId))
+		if (!room) {
+			throw ApiError.BadRequest('Команда не была найдена')
+		}
+		const prevType = task.type
+		task.type = type
+		room.tasks[type] = [...room.tasks[type], task]
+		room.tasks[prevType] = room.tasks[prevType].filter(
+			(taskFilter) =>
+				taskFilter.title !== task.title &&
+				taskFilter.description !== task.description
+		)
+
+		await room.save()
 		return room
 	}
 }

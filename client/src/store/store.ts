@@ -7,7 +7,10 @@ import pData from '../data/participants-data.json'
 // import tasksData from '../data/tasks-data.json'
 import axios from 'axios'
 import RoomService from '../serverApi/services/RoomService'
-import { task as DBTask } from './../serverApi/models/response/RoomResponse'
+import {
+	task as DBTask,
+	task,
+} from './../serverApi/models/response/RoomResponse'
 type taskTypes = {
 	planned: 'planned'
 	doing: 'doing'
@@ -157,27 +160,49 @@ export default class Store {
 				title: this.formData.taskTitle,
 				description: this.formData.taskDescription,
 			}
-			const response = await RoomService.addTask(
-				this.user.rooms[0],
-				newTask.type,
-				newTask.title,
-				newTask.description
-			)
-			if (
-				newTask.type === 'planned' ||
-				newTask.type === 'doing' ||
-				newTask.type === 'completed'
-			) {
-				this.room.tasks[newTask.type] = [
-					...this.room.tasks[newTask.type],
-					newTask,
-				]
-			}
+			const response = await RoomService.addTask(this.user.rooms[0], newTask)
+			this.setRoom(response.data)
+
+			// if (
+			// 	newTask.type === 'planned' ||
+			// 	newTask.type === 'doing' ||
+			// 	newTask.type === 'completed'
+			// ) {
+			// 	this.room.tasks[newTask.type] = [
+			// 		...this.room.tasks[newTask.type],
+			// 		newTask,
+			// 	]
+			// }
 		} catch (e) {
 			console.log(e)
 		}
 	}
 
+	async deleteTask() {
+		const task: task = {
+			type: this.taskInfo.type,
+			title: this.taskInfo.title,
+			description: this.taskInfo.content,
+		}
+		const response = await RoomService.deleteTask(this.user.rooms[0], task)
+		this.setRoom(response.data)
+		this.hideTaskInfo()
+	}
+
+	async setTaskType(type: string) {
+		const task: task = {
+			type: this.taskInfo.type,
+			title: this.taskInfo.title,
+			description: this.taskInfo.content,
+		}
+		const response = await RoomService.setTaskType(
+			this.user.rooms[0],
+			type,
+			task
+		)
+		this.setRoom(response.data)
+		this.hideTaskInfo()
+	}
 	// App functions ==========================================
 
 	addParticipant(ava: string, name: string) {

@@ -20,19 +20,22 @@ const TaskInfo: FC = () => {
 					<div className="actions">
 						{(store.taskInfo.type === 'planned' ||
 							store.taskInfo.type === 'doing') && (
-							// <button onClick={() => store.setTaskType('completed')}>
-							<button>Выполнено</button>
+							<button onClick={() => store.setTaskType('completed')}>
+								Выполнено
+							</button>
 						)}
 						{store.taskInfo.type === 'planned' && (
-							// <button onClick={() => store.setTaskType('doing')}>
-							<button>Выполнять</button>
+							<button onClick={() => store.setTaskType('doing')}>
+								Выполнять
+							</button>
 						)}
-						{/* <button
+						<button
 							onClick={() => {
 								store.deleteTask()
 							}}
-						> */}
-						<button>Удалить</button>
+						>
+							Удалить
+						</button>
 					</div>
 				</div>
 			)}
